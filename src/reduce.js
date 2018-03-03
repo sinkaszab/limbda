@@ -2,6 +2,11 @@ const _reduce = (f, a, [h, ...t]) => h != undefined
   ? _reduce(f, f(a, h), t)
   : a;
 
-const reduce = (f, [h, ...t], i) => i == undefined
-  ? !t.length ? h : reduce(f, t, h)
+const helper = (f, [h, ...t], i) => i == undefined
+  ? !t.length ? h : helper(f, t, h)
   : _reduce(f, i, [h, ...t]);
+
+export default const reduce = (f, coll, i) => 'entries' in coll
+  ? helper(f, coll.entries(), i)
+  : helper(f, Object.entries(coll), i);
+  
