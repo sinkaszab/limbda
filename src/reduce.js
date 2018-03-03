@@ -1,5 +1,5 @@
 const _reduce = (f, a, [h, ...t]) => h != undefined
-  ? helper(f, f(a, h), t)
+  ? _reduce(f, f(a, h), t)
   : a;
 
 const reduce = (f, [h, ...t], i) => i == undefined
