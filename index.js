@@ -1,8 +1,10 @@
 'use strict';
 
-const reduce = require('./src/reduce.js');
+const reduce = require('./lib/reduce.js');
+const map = require('./lib/map.js');
+const filter = require('./lib/filter.js');
 
-const fmin = { reduce };
+const fmin = { reduce, map, filter };
 
 module.exports = fmin;
 
