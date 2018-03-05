@@ -1,6 +1,6 @@
 {
   "name": "limbda",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Functional programming helper library.",
   "main": "index.js",
   "scripts": {
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@bitbucket.org/sinkaszab/limbda.git"
+    "url": "git@github.com:sinkaszab/limbda.git"
   },
   "keywords": [
     "functional",
@@ -18,5 +18,5 @@
   ],
   "author": "Szabolcs Sinka",
   "license": "ISC",
-  "homepage": "https://bitbucket.org/sinkaszab/limbda#readme"
+  "homepage": "https://github.com/sinkaszab/limbda/wiki"
 }
