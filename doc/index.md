@@ -1,4 +1,4 @@
-# fmin documentation
+# limbda documentation
 
 ## reduce
 
