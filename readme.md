@@ -22,4 +22,4 @@ Import as you would any other packege in Node.js, eg.:
 
 ## Documentation
 
-[limbda - docs](doc/index)
+[limbda - docs](https://github.com/sinkaszab/limbda/wiki)
