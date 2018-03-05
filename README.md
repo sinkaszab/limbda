@@ -1,4 +1,4 @@
-# fmin
+# limbda
 
 ## Rationale
 
@@ -14,12 +14,12 @@ Current implementations were not yet benchmarked, so it can easily happen you'll
 
 Get package from npm:
 
-`npm install fmin`
+`npm install limbda`
 
 As you would import any other packege in Node.js, eg.:
 
-`const fmin = require('fmin');`
+`const limbda = require('limbda');`
 
 ## Documentation
 
-[fmin - docs](doc/index)
+[limbda - docs](doc/index)
