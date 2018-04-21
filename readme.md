@@ -22,7 +22,7 @@ Import as you would any other packege in Node.js, eg.:
 
 ## Documentation
 
-## isIterable
+### isIterable
 
 Check if `x` implements the iterable interface/protocol. (ES6 rest/spread operations, also generators need iterables.)
 
