@@ -8,7 +8,7 @@ This library is a playground for me at the same time. It's fun to experiment wit
 
 ## State
 
-Current implementations were not yet benchmarked, so it can easily happen you'll meet performance issues or memory problems. Breaking changes might/will happen. Best thing to do if you'd like to sniff around is to check the tests to get a picture how the library works.
+Current implementations were not yet benchmarked, so it can easily happen you'll meet performance issues or memory problems (eg.: TCO). Breaking changes might/will happen. Best thing to do if you'd like to sniff around is to check the tests to get a picture how the library methods works.
 
 ## Install
 
@@ -32,12 +32,26 @@ isIterable(x: Any?) -> Bool
 
 ### reduce
 
-// TODO...
+Reduce works for all basic Javascript collection types: String, Array, Object, Map & Set. The reducer function should return a value so that reduce will have a reducted value in the end.
+
+```javascript
+reduce(reducer: Function, collection: AnyColl?, initialValue: Any?) -> Any?
+reducerFunction(accumulator: Any?, item: Any?) -> Any?
+```
+
+When reducing an String, Array or Set, item will be a value. In case of key-value types, item will be an Object Entry, a.k.a. an Array of 2 items, `[key, value]`.
+
+```javascript
+# String, Array & Set reducer signature:
+const reducerA = (accumulator, value) => accumulator + value;
+# Object, Map reducer signature:
+const reducerB = (accumulator, [key, value]) => accumulator.push(key + value);
+```
 
 ### map
 
-// TODO ...
+// TODO: Update for changed reduce if needed, write tests & docs.
 
 ### filter
 
-// TODO...
+// TODO: Update for changed reduce if needed, write tests & docs.
