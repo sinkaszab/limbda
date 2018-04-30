@@ -10,7 +10,7 @@
     "postbuild": "npm run test",
     "lint": "eslint lib/ test/",
     "start": "node dist/limbda.js",
-    "test": "babel test/*.test.js | node"
+    "test": "tape -r babel-register test/*.test.js | tap-spec"
   },
   "repository": {
     "type": "git",
@@ -38,6 +38,7 @@
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-flow": "^6.23.0",
+    "babel-register": "^6.26.0",
     "eslint": "^4.19.1",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-plugin-flowtype": "^2.46.3",
@@ -47,6 +48,7 @@
     "eslint-plugin-react": "^7.7.0",
     "flow-bin": "^0.70.0",
     "prettier": "^1.12.1",
+    "tap-spec": "^4.1.1",
     "tape": "^4.9.0"
   },
   "dependencies": {}
