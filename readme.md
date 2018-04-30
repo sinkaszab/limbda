@@ -1,5 +1,7 @@
 # limbda
 
+[![Build Status](https://travis-ci.org/sinkaszab/limbda.svg?branch=master)](https://travis-ci.org/sinkaszab/limbda)
+
 ## Rationale
 
 After having implemented array reduce with using ES6 features I remembered while having worked with Clojure for a while how nice it was that collection transformations could be done on any type of collection. One of the library's aims is to make transformations work for all collection types as well as implement some functional programming paradigms to make function composing easier.
