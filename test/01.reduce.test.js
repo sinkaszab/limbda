@@ -1,6 +1,8 @@
 import test from 'tape';
 import { reduce } from './dist/limbda'; // eslint-disable-line
 
+console.log('Testing limbda.reduce');
+
 test('Required arguments:', (t) => {
   const collErrorRegex = new RegExp('boolean, number and symbol are not collections');
   t.plan(4);

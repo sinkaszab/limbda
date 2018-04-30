@@ -10,7 +10,7 @@
     "postbuild": "npm run test",
     "lint": "eslint lib/ test/",
     "start": "node dist/limbda.js",
-    "test": "babel test/test.js | node"
+    "test": "babel test/*.test.js | node"
   },
   "repository": {
     "type": "git",
