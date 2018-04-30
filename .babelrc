@@ -1,0 +1,23 @@
+{
+  "presets": [
+    ["env", {
+      "targets": {
+        "browsers": [
+          "last 2 versions",
+          "safari >= 8"
+        ],
+        "node": "8.11.1"
+      }
+    }],
+    "flow"
+  ],
+  "plugins": [
+    "transform-exponentiation-operator",
+    "transform-async-to-generator",
+    "transform-async-generator-functions",
+    "transform-do-expressions",
+    "transform-object-rest-spread",
+    ["transform-class-properties", { "spec": true }],
+    "transform-function-bind"
+  ]
+}
