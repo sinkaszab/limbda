@@ -9,7 +9,7 @@
     "prebuild": "npm run lint",
     "postbuild": "npm run test",
     "lint": "eslint lib/ test/",
-    "start": "node lib/limbda.js",
+    "start": "node dist/limbda.js",
     "test": "babel test/test.js | node"
   },
   "repository": {
