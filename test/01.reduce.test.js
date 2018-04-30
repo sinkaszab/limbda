@@ -1,9 +1,7 @@
 import test from 'tape';
-import { reduce } from './dist/limbda'; // eslint-disable-line
+import { reduce } from './../dist/limbda'; // eslint-disable-line
 
-console.log('Testing limbda.reduce');
-
-test('Required arguments:', (t) => {
+test('reduce | Required arguments:', (t) => {
   const collErrorRegex = new RegExp('boolean, number and symbol are not collections');
   t.plan(4);
   t.throws( // 1
@@ -24,7 +22,7 @@ test('Required arguments:', (t) => {
   );
 });
 
-test('Reduce an empty collection:', (t) => {
+test('reduce | Reduce an empty collection:', (t) => {
   t.plan(6);
   t.equal( // 1
     reduce((a, v) => a + v, []),
@@ -52,7 +50,7 @@ test('Reduce an empty collection:', (t) => {
   );
 });
 
-test('Reduce a non-empty collection:', (t) => {
+test('reduce | Reduce a non-empty collection:', (t) => {
   t.plan(3);
   t.equal( // 1
     reduce((a, v) => ++v, [21]), // eslint-disable-line no-param-reassign
@@ -68,7 +66,7 @@ test('Reduce a non-empty collection:', (t) => {
   );
 });
 
-test('Reduce different type of collections:', (t) => {
+test('reduce | Reduce different type of collections:', (t) => {
   t.plan(6);
   t.equal( // 1
     reduce((a, v) => `${a}:${v}`, 'abc'),
