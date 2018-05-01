@@ -10,15 +10,15 @@ test('reduce | Required arguments:', (t) => {
   );
   t.throws( // 2
     () => reduce((a, v) => v, 2),
-    collErrorRegex, 'Number not excepted as collection.',
+    collErrorRegex, 'Number not accepted as collection.',
   );
   t.throws( // 3
     () => reduce((a, v) => v, true),
-    collErrorRegex, 'Boolean not excepted as collection.',
+    collErrorRegex, 'Boolean not accepted as collection.',
   );
   t.throws( // 4
     () => reduce((a, v) => v, Symbol('foo')),
-    collErrorRegex, 'Symbol not excepted as collection.',
+    collErrorRegex, 'Symbol not accepted as collection.',
   );
 });
 
