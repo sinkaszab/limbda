@@ -23,46 +23,105 @@ test('reduce | Required arguments:', (t) => {
 });
 
 test('reduce | Reduce an empty collection:', (t) => {
-  t.plan(6);
+  t.plan(11);
   t.equal( // 1
-    reduce((a, v) => a + v, []),
-    undefined, 'Empty collection without initial value returns undefined.',
+    reduce((a, v) => a + v, ''),
+    undefined, 'Empty String (Collection) without initial value returns undefined.',
   );
   t.equal( // 2
+    reduce((a, v) => a + v, []),
+    undefined, 'Empty Array (Collection) without initial value returns undefined.',
+  );
+  t.equal( // 3
+    reduce((a, v) => a + v, {}),
+    undefined, 'Empty Object (Collection) without initial value returns undefined.',
+  );
+  t.equal( // 4
+    reduce((a, v) => a + v, new Set()),
+    undefined, 'Empty Set (Collection) without initial value returns undefined.',
+  );
+  t.equal( // 5
+    reduce((a, v) => a + v, new Map()),
+    undefined, 'Empty Map (Collection) without initial value returns undefined.',
+  );
+  t.equal( // 6
+    (function foo() { return reduce((a, v) => a + v, arguments); }()),
+    undefined, 'Empty Arguments (Collection) without initial value returns undefined.',
+  );
+  t.equal( // 7
     reduce((a, v) => a + v, [], 42),
     42, 'Empty collection with initial value returns initial value.',
   );
-  t.equal( // 3
+  t.equal( // 8
     reduce((a, v) => a + v, undefined),
     undefined, 'Collection == undefined returns undefined|null, aka coll itself.',
   );
-  t.equal( // 4
+  t.equal( // 9
     reduce((a, v) => a + v, null),
     null, 'Collection == undefined returns undefined|null, aka coll itself.',
   );
-  t.equal( // 5
+  t.equal( // 10
     reduce((a, v) => a + v),
     undefined, 'Not passing a collection argument returns undefined.',
   );
-  t.equal( // 6
+  t.equal( // 11
     reduce((a, v) => a + v, null, 12),
     12, 'If collection undefined, but has initial value, that becomes its return value.',
   );
 });
 
-test('reduce | Reduce a non-empty collection:', (t) => {
-  t.plan(3);
+test('reduce | A Collection with one element will return that one without transformation applied to it:', (t) => {
+  t.plan(12);
   t.equal( // 1
-    reduce((a, v) => ++v, [21]), // eslint-disable-line no-param-reassign
-    21, 'A collection with one element will return that one without transformation applied to it.',
+    reduce((a, v) => a + v + 1, 'a'),
+    'a', 'String',
   );
   t.equal( // 2
-    reduce((a, v) => a + v, [21], 21),
-    42, 'A collection with one element and initial value set will reduce these two.',
+    reduce((a, v) => a + v + 1, [21]),
+    21, 'Array',
   );
-  t.equal( // 3
-    reduce((a, v) => a + v, [1, 2, 3, 4, 5], 0),
-    15, 'Reduces to appropriate value.',
+  t.deepEquals( // 3
+    reduce((a, [k, v]) => a + k + v + 1, { a: 1 }),
+    ['a', 1], 'Object',
+  );
+  t.deepEquals( // 4
+    reduce((a, v) => a + v + 1, new Map([['a', 1]])),
+    ['a', 1], 'Map',
+  );
+  t.equal( // 5
+    reduce((a, v) => a + v + 1, new Set(['a', 'a', 'a'])),
+    'a', 'Set',
+  );
+  t.equal( // 6
+    (function foo() { return reduce((a, v) => a + v + 1, arguments); }(2)),
+    2, 'Arguments',
+  );
+  t.comment('reduce | Collections with one element & initial value set will reduce these two.');
+  t.equal( // 7
+    reduce((a, v) => a + v, 'g', 'a strin'),
+    'a string', 'String',
+  );
+  t.equal( // 8
+    reduce((a, v) => a + v, [21], 21),
+    42, 'Array',
+  );
+  t.deepEquals( // 9
+    reduce((a, [k, v]) => ({ ...a, [k]: v }), { first: 'item' }, { initial: 'value' }),
+    { first: 'item', initial: 'value' }, 'Object',
+  );
+  t.deepEquals( // 10
+    reduce((a, [k, v]) => a.set(k, v), new Map([['x', 1]]), new Map([['g', 3]])),
+    new Map([['x', 1], ['g', 3]]), 'Map',
+  );
+  t.deepEquals( // 11
+    reduce((a, v) => a.add(v), new Set(['b']), new Set(['a'])),
+    new Set(['a', 'b']), 'Set',
+  );
+  t.equal( // 12
+    (function reduceArgumentsWithInitial() {
+      return reduce((a, v) => a + v, arguments, 1);
+    }(2)),
+    3, 'Arguments',
   );
 });
 
@@ -73,13 +132,12 @@ test('reduce | Reduce different type of collections:', (t) => {
     'a:b:c', 'Reduce String.',
   );
   t.deepEquals( // 2
-    // eslint-disable-next-line no-param-reassign
-    reduce((a, v) => a.splice(0, 0, ++v) && a, [1, 2, 3, 4, 5], []),
+    reduce((a, v) => a.splice(0, 0, v + 1) && a, [1, 2, 3, 4, 5], []),
     [6, 5, 4, 3, 2], 'Reduce Array.',
   );
   t.deepEquals( // 3
     reduce((a, [k, v]) => {
-      a[`${k}X`] = ++v; // eslint-disable-line no-param-reassign
+      a[`${k}X`] = v + 1; // eslint-disable-line no-param-reassign
       return a;
     }, {
       a: 1, b: 2, c: 3, d: 4, e: 5, f: 6,
