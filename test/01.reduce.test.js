@@ -1,5 +1,5 @@
 import test from 'tape';
-import { reduce } from './../dist/limbda';
+import { reduce } from './../lib/limbda';
 
 test('reduce | Required arguments:', (t) => {
   const collErrorRegex = new RegExp('boolean, number and symbol are not collections');
