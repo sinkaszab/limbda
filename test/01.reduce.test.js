@@ -22,49 +22,71 @@ test('reduce | Required arguments:', (t) => {
   );
 });
 
-test('reduce | Reduce an empty collection:', (t) => {
-  t.plan(11);
+test('reduce | Reduce an empty Collection without initial value returns undefined:', (t) => {
+  t.plan(16);
   t.equal( // 1
     reduce((a, v) => a + v, ''),
-    undefined, 'Empty String (Collection) without initial value returns undefined.',
+    undefined, 'Empty String',
   );
   t.equal( // 2
     reduce((a, v) => a + v, []),
-    undefined, 'Empty Array (Collection) without initial value returns undefined.',
+    undefined, 'Empty Array',
   );
   t.equal( // 3
     reduce((a, v) => a + v, {}),
-    undefined, 'Empty Object (Collection) without initial value returns undefined.',
+    undefined, 'Empty Object',
   );
   t.equal( // 4
     reduce((a, v) => a + v, new Set()),
-    undefined, 'Empty Set (Collection) without initial value returns undefined.',
+    undefined, 'Empty Set',
   );
   t.equal( // 5
     reduce((a, v) => a + v, new Map()),
-    undefined, 'Empty Map (Collection) without initial value returns undefined.',
+    undefined, 'Empty Map',
   );
   t.equal( // 6
     (function foo() { return reduce((a, v) => a + v, arguments); }()),
-    undefined, 'Empty Arguments (Collection) without initial value returns undefined.',
+    undefined, 'Empty Arguments',
   );
+  t.comment('Empty collection with initial value returns initial value.');
   t.equal( // 7
-    reduce((a, v) => a + v, [], 42),
-    42, 'Empty collection with initial value returns initial value.',
+    reduce((a, v) => a + v, '', 42),
+    42, 'Empty String with initial value.',
   );
   t.equal( // 8
-    reduce((a, v) => a + v, undefined),
-    undefined, 'Collection == undefined returns undefined|null, aka coll itself.',
+    reduce((a, v) => a + v, [], 42),
+    42, 'Empty Array with initial value.',
   );
   t.equal( // 9
-    reduce((a, v) => a + v, null),
-    null, 'Collection == undefined returns undefined|null, aka coll itself.',
+    reduce((a, v) => a + v, {}, 42),
+    42, 'Empty Object with initial value.',
   );
   t.equal( // 10
+    reduce((a, v) => a + v, new Map(), 42),
+    42, 'Empty Map with initial value.',
+  );
+  t.equal( // 11
+    reduce((a, v) => a + v, new Set(), 42),
+    42, 'Empty Set with initial value.',
+  );
+  t.equal( // 12
+    (function foo() { return reduce((a, v) => a + v, arguments, 42); }()),
+    42, 'Empty Arguments with initial value.',
+  );
+  t.comment('Collection == undefined returns undefined|null, aka coll itself.');
+  t.equal( // 13
+    reduce((a, v) => a + v, undefined),
+    undefined, 'undefined',
+  );
+  t.equal( // 14
+    reduce((a, v) => a + v, null),
+    null, 'null',
+  );
+  t.equal( // 15
     reduce((a, v) => a + v),
     undefined, 'Not passing a collection argument returns undefined.',
   );
-  t.equal( // 11
+  t.equal( // 16
     reduce((a, v) => a + v, null, 12),
     12, 'If collection undefined, but has initial value, that becomes its return value.',
   );
