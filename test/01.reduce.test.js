@@ -48,7 +48,7 @@ test('reduce | Reduce an empty Collection without initial value returns undefine
     (function foo() { return reduce((a, v) => a + v, arguments); }()),
     undefined, 'Empty Arguments',
   );
-  t.comment('Empty collection with initial value returns initial value.');
+  t.comment('reduce | Empty collection with initial value returns initial value.');
   t.equal( // 7
     reduce((a, v) => a + v, '', 42),
     42, 'Empty String with initial value.',
@@ -73,7 +73,7 @@ test('reduce | Reduce an empty Collection without initial value returns undefine
     (function foo() { return reduce((a, v) => a + v, arguments, 42); }()),
     42, 'Empty Arguments with initial value.',
   );
-  t.comment('Collection == undefined returns undefined|null, aka coll itself.');
+  t.comment('reduce | Collection == undefined returns undefined|null, aka coll itself.');
   t.equal( // 13
     reduce((a, v) => a + v, undefined),
     undefined, 'undefined',
