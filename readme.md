@@ -29,7 +29,7 @@ Import as you would any other packege in Node.js, eg.:
 Check if `x` implements the iterable interface/protocol. (ES6 rest/spread operations, also generators need iterables.)
 
 ```js
-isIterable(x: ?any): boolean
+isIterable(x: Any?) -> Boolean
 ```
 
 ### reduce
