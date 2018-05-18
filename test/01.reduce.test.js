@@ -151,11 +151,11 @@ test('reduce | Reduce different type of collections:', (t) => {
   t.plan(6);
   t.equal( // 1
     reduce((a, v) => `${a}:${v}`, 'abc'),
-    'a:b:c', 'Reduce String.',
+    'a:b:c', 'String',
   );
   t.deepEquals( // 2
     reduce((a, v) => a.splice(0, 0, v + 1) && a, [1, 2, 3, 4, 5], []),
-    [6, 5, 4, 3, 2], 'Reduce Array.',
+    [6, 5, 4, 3, 2], 'Array',
   );
   t.deepEquals( // 3
     reduce((a, [k, v]) => {
@@ -166,20 +166,20 @@ test('reduce | Reduce different type of collections:', (t) => {
     }, {}),
     {
       aX: 2, bX: 3, cX: 4, dX: 5, eX: 6, fX: 7,
-    }, 'Reduce Object.',
+    }, 'Object',
   );
   t.equal( // 4
     reduce((a, [k, v]) => a + k + v, new Map([['a', 1], ['b', 2], ['c', 3], ['d', 4], ['e', 5], ['f', 6]]), ''),
-    'a1b2c3d4e5f6', 'Reduce Map.',
+    'a1b2c3d4e5f6', 'Map',
   );
   t.equal( // 5
     reduce((a, v) => a * v, new Set([1, 2, 2, 3, 4, 4, 4, 5, 6])),
-    720, 'Reduce Set.',
+    720, 'Set',
   );
   t.equal( // 6
     (function reduceArguments() {
       return reduce((a, v) => a * v, arguments);
     }(1, 2, 3, 4, 5, 6)),
-    720, 'Reduce Arguments.',
+    720, 'Arguments',
   );
 });
