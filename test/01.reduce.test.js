@@ -22,6 +22,14 @@ test('reduce | Required arguments:', (t) => {
   );
 });
 
+test('reduce | Reducer function\'s return value:', (t) => {
+  t.plan(1);
+  t.equal(
+    reduce(function dontReturn() { }, [1, 2, 3], 'initialValue'), // eslint-disable-line prefer-arrow-callback
+    undefined, 'Functions return `undefined` by default. Accumulated value must be returned by reducer function.',
+  );
+});
+
 test('reduce | Reduce an empty Collection without initial value returns undefined:', (t) => {
   t.plan(16);
   t.equal( // 1

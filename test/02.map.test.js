@@ -63,6 +63,14 @@ test('map | Map an empty Collection returns an empty Array:', (t) => {
   );
 });
 
+test('map | Transforming function\'s return value:', (t) => {
+  t.plan(1);
+  t.deepEquals(
+    map(function intentionallyNoReturn() { }, [1, 2]), // eslint-disable-line prefer-arrow-callback
+    [undefined, undefined], 'Functions return `undefined` by default.',
+  );
+});
+
 test('map | Map a Collection with one element will return an Array with one mapped element:', (t) => {
   t.plan(6);
   t.deepEquals( // 1
