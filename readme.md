@@ -10,7 +10,7 @@ This library is a playground for me at the same time. It's fun to experiment wit
 
 ## State
 
-Current implementations were not yet benchmarked, so it can easily happen you'll meet performance issues or memory problems (eg.: TCO). Breaking changes might/will happen. Best thing to do if you'd like to sniff around is to check the tests to get a picture how the library methods works.
+Current implementations were not yet benchmarked, so it can easily happen you'll meet performance issues or memory problems (eg.: TCO, extensive use of rest & spread). Breaking changes might/will happen. Best thing to do if you'd like to sniff around is to check the tests to get a picture how the library methods works.
 
 ## Install
 
@@ -32,28 +32,54 @@ Check if `x` implements the iterable interface/protocol. (ES6 rest/spread operat
 isIterable(x: Any?) -> Boolean
 ```
 
-### reduce
+### reduce, map, filter
 
-Reduce works for all basic Javascript collection types: String, Array, Object, Map & Set. The reducer function should return a value so that reduce will have a reducted value in the end.
+Reduce, map & filter work for all basic Javascript collection types: String, Array, Object, Map, Set & Arguments (Array-likes).
+
+#### Transforming functions
+
+When reducing, mapping or filtering an String, Array or Set, item will be a value. In case of key-value types, item will be an "Object Entry", a.k.a. an Array of 2 items, a pair, `[key, value]`. See signatures.
+
+The transforming functions should return a value so that collection transformation will have a "worthwhile" final value in the end.
+
+### reduce
 
 ```javascript
 reduce(reducer: Function, collection: AnyColl?, initialValue: Any?) -> Any?
 reducerFunction(accumulator: Any?, item: Any?) -> Any?
 ```
 
-When reducing an String, Array or Set, item will be a value. In case of key-value types, item will be an Object Entry, a.k.a. an Array of 2 items, `[key, value]`.
-
 ```javascript
 # String, Array & Set reducer signature:
 const reducerA = (accumulator, value) => accumulator + value;
 # Object, Map reducer signature:
-const reducerB = (accumulator, [key, value]) => accumulator.push(key + value);
+const reducerB = (accumulator, [key, value]) => accumulator + (key + value);
 ```
 
 ### map
 
-// TODO: Update for changed reduce if needed, write tests & docs.
+```javascript
+map(transformer: Function, collection: AnyColl?) -> Array
+transformerFunction(value: Any?) -> Any?
+```
+
+```javascript
+# String, Array & Set transformer signature:
+const transformerA = value => f(value);
+# Object, Map transformer signature:
+const transformerB = ([key, value]) => f(key, value);
+```
 
 ### filter
 
-// TODO: Update for changed reduce if needed, write tests & docs.
+```javascript
+filter(filtering: Function, collection: AnyColl?) -> Array
+filteringFunction(value: Any?) -> Bool?
+```
+
+```javascript
+# String, Array & Set filtering signature:
+const filteringFnA = value => f(value);
+# Object, Map filtering signature:
+const filteringFnB = ([key, value]) => f(key, value);
+```
