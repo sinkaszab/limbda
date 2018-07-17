@@ -10,7 +10,8 @@
     "postbuild": "npm run test",
     "lint": "eslint lib/ test/",
     "start": "node dist/limbda.js",
-    "test": "tape -r babel-register test/*.test.js | tap-spec"
+    "test": "tape -r babel-register test/*.test.js | tap-spec",
+    "dev": "babel --watch lib/ --out-dir dist/ --source-maps"
   },
   "repository": {
     "type": "git",
