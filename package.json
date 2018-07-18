@@ -11,7 +11,7 @@
     "lint": "eslint lib/ test/",
     "start": "node dist/limbda.js",
     "test": "tape -r babel-register test/*.test.js | tap-spec",
-    "dev": "babel --watch lib/ --out-dir dist/ --source-maps"
+    "dev": "babel --watch lib/ --out-dir dist/ --source-maps && npm run start"
   },
   "repository": {
     "type": "git",
