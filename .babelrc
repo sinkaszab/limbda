@@ -8,8 +8,7 @@
         ],
         "node": "8.11.1"
       }
-    }],
-    "flow"
+    }]
   ],
   "plugins": [
     "transform-exponentiation-operator",
