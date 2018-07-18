@@ -1,11 +1,18 @@
 {
+  "parserOptions": {
+    "ecmaVersion": 2017,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "experimentalObjectRestSpread": true
+    }
+  },
   "env": {
     "es6": true,
     "browser": true,
     "node": true
   },
   "extends": [
-    "airbnb"
+    "airbnb-base/legacy"
   ],
   "rules": {
     "no-console": 0,
@@ -14,6 +21,7 @@
     "eqeqeq": 0,
     "no-underscore-dangle": 0,
     "prefer-rest-params": 0,
-    "prefer-arrow-callback": 0
+    "prefer-arrow-callback": 0,
+    "comma-dangle": ["error", "always-multiline"]
   }
 }
