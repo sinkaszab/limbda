@@ -12,7 +12,8 @@
     "start": "if [[ -z ${NODE_ENV+x} ]] || [[ $NODE_ENV =~ ^prod.*$ ]] ; then npm run start:prod ; else npm run start:dev ; fi",
     "test": "tape -r babel-register test/*.test.js | tap-spec",
     "start:dev": "babel --watch lib/ --out-dir dist/ --source-maps",
-    "start:prod": "npm run build"
+    "start:prod": "npm run build",
+    "benchmark": "node benchmark/benchmarks.js"
   },
   "repository": {
     "type": "git",
@@ -42,10 +43,12 @@
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "babel-register": "^6.26.0",
+    "benchmark": "^2.1.4",
     "eslint": "^4.19.1",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-html": "^4.0.5",
     "eslint-plugin-import": "^2.14.0",
+    "lodash": "^4.17.10",
     "tap-spec": "^4.1.2",
     "tape": "^4.9.1"
   },
