@@ -6,7 +6,7 @@
           "last 2 versions",
           "safari >= 8"
         ],
-        "node": "8.11.1"
+        "node": "8.11.3"
       }
     }]
   ],
@@ -16,7 +16,20 @@
     "transform-async-generator-functions",
     "transform-do-expressions",
     "transform-object-rest-spread",
-    ["transform-class-properties", { "spec": true }],
-    "transform-function-bind"
+    [
+      "transform-class-properties",
+      {
+        "spec": true
+      }
+    ],
+    "transform-function-bind",
+    [
+      "transform-runtime",
+      {
+        "polyfill": false,
+        "regenerator": true
+      }
+    ],
+    "tailcall-optimization"
   ]
 }
