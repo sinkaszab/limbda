@@ -1,6 +1,6 @@
-const Benchmark = require('benchmark');
-const limbda = require('../dist/limbda');
-const _ = require('lodash');
+import Benchmark from 'benchmark';
+import { reduce } from './../lib/limbda';
+import _ from 'lodash';
 
 const reduceSuite = new Benchmark.Suite;
 const numbersToSum = [];
@@ -15,14 +15,14 @@ function *range(start, end) {
   return end;
 }
 
-for (let n of range(0, 1000)) {
+for (let n of range(0, 10000)) {
   numbersToSum.push(n);
 }
 
 reduceSuite
   .add(
     'limbda#reduce | Sum numbers',
-    () => limbda.reduce(sum, numbersToSum),
+    () => reduce(sum, numbersToSum),
   )
   .add(
     'lodash#reduce | Sum numbers',
