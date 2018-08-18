@@ -13,7 +13,7 @@
     "test": "tape -r babel-register test/*.test.js | tap-spec",
     "start:dev": "babel --watch lib/ --out-dir dist/ --source-maps",
     "start:prod": "npm run build",
-    "benchmark": "node benchmark/benchmarks.js"
+    "benchmark": "babel-register benchmark/benchmarks.js"
   },
   "repository": {
     "type": "git",
@@ -33,6 +33,7 @@
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-eslint": "^8.2.6",
+    "babel-plugin-tailcall-optimization": "^1.0.13",
     "babel-plugin-transform-async-generator-functions": "^6.24.1",
     "babel-plugin-transform-async-to-generator": "^6.24.1",
     "babel-plugin-transform-class-properties": "^6.24.1",
@@ -40,9 +41,11 @@
     "babel-plugin-transform-exponentiation-operator": "^6.24.1",
     "babel-plugin-transform-function-bind": "^6.22.0",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "babel-register": "^6.26.0",
+    "babel-register-cli": "^5.0.0",
     "benchmark": "^2.1.4",
     "eslint": "^4.19.1",
     "eslint-config-airbnb-base": "^13.1.0",
