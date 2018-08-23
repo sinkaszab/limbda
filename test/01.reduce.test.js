@@ -41,7 +41,7 @@ test(
 );
 
 test(
-  'reduce | Reduce an empty Collection without initial value returns undefined:',
+  'reduce | An empty Collection without initial value returns undefined:',
   function testEmptyCollection(t) {
     t.plan(16);
     t.equal( // 1
@@ -114,7 +114,7 @@ test(
 );
 
 test(
-  'reduce | A Collection with one element will return that one without transformation applied to it:',
+  'reduce | A Collection with one element (no initial value) will return that one without transformation applied to it:',
   function testOneElemCollection(t) {
     t.plan(12);
     t.equal( // 1
