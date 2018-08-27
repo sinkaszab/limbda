@@ -10,7 +10,14 @@ This library is a playground for me at the same time. It's fun to experiment wit
 
 ## State
 
-Current implementations were not yet benchmarked, so it can easily happen you'll meet performance issues or memory problems (eg.: TCO, extensive use of rest & spread). Breaking changes might/will happen. Best thing to do if you'd like to sniff around is to check the tests to get a picture how the library methods works.
+Creation of proper benchmarking is in progress.
+
+**Sample,** sum 10 000 numbers:
+limbda#reduce | Sum numbers 0.00011549035685890135
+lodash#reduce | Sum numbers 0.00012098247137972124
+Array#reduce  | Sum numbers 0.00006934145322898773
+
+Breaking changes might happen. Best thing to do if you'd like to sniff around is to check the tests to get a picture how the library methods work. (Tests keep the contract for the functions' interface, check them for change between commits before you upgrade to a new version.)
 
 ## Install
 
