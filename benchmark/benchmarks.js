@@ -19,6 +19,8 @@ for (let n of range(0, 10000)) {
   numbersToSum.push(n);
 }
 
+// TODO: add jQuery & Rambda
+
 reduceSuite
   .add(
     'limbda#reduce | Sum numbers',
