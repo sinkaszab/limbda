@@ -23,7 +23,7 @@ test(
 
 test(
   'range | the from "start" to "end" set must contain series:',
-  function throwIfBoundary(t) {
+  function throwIfRangeNotSubsetOfBoundaries(t) {
     const endLessThanStartException = new RegExp('End is less than start, while series is increasing.');
     const endGreaterThanStartException = new RegExp('End is greater than start, while series is decreasing.');
     const seriesIncluded = 'Doesn\'t throw if series is contained by "start-end" interval.';
@@ -47,13 +47,21 @@ test(
   },
 );
 
-// test(
-//   'range | Test draft:',
-//   function testRequiredArguments(t) {
-//     t.plan(1);
-//     t.deepEquals( // 1
-//       [...range(5, 9)],
-//       [5, 6, 7, 8, 9], 'Range',
-//     );
-//   },
-// );
+test(
+  'range | Generated range by argument specification:',
+  function generateRangeBySpec(t) {
+    t.plan(3);
+    t.ok( // 1
+      range(5).next().value === 5,
+      'Range\'s first element strict equals "start".',
+    );
+    t.ok( // 2
+      [...range(5, 11)].pop() === 11,
+      'Range\'s last element strict equals "end".',
+    );
+    t.ok( // 2
+      [...range(5, 11, 1, false)].pop() === 10,
+      'Range\'s last element strict equals "end" - 1 if not inclusive.',
+    );
+  },
+);
