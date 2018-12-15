@@ -1,5 +1,5 @@
 import Benchmark from 'benchmark';
-import { reduce } from './../lib/limbda';
+import { reduce } from '../dist/limbda';
 import _ from 'lodash';
 
 const reduceSuite = new Benchmark.Suite;
