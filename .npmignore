@@ -2,5 +2,7 @@ lib/
 benchmark/
 test/
 .eslintrc
+.babelrc
 .npmignore
 .travis.yml
+TODO.md
