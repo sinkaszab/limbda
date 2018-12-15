@@ -5,15 +5,15 @@
   "main": "dist/limbda.js",
   "scripts": {
     "prepare": "npm run build",
-    "build": "babel lib/ --out-dir dist/ --source-maps",
+    "build": "rm -rf dist && babel lib/ --out-dir dist/ --source-maps",
     "prebuild": "npm run lint",
     "postbuild": "npm run test",
     "lint": "eslint lib/ test/",
     "start": "if [[ -z ${NODE_ENV+x} ]] || [[ $NODE_ENV =~ ^prod.*$ ]] ; then npm run start:prod ; else npm run start:dev ; fi",
-    "test": "tape -r babel-register test/*.test.js | tap-spec",
+    "test": "tape --require @babel/register test/*.test.js | tap-spec",
     "start:dev": "babel --watch lib/ --out-dir dist/ --source-maps",
     "start:prod": "npm run build",
-    "benchmark": "babel-register benchmark/benchmarks.js"
+    "benchmark": "babel-node benchmark/benchmarks.js"
   },
   "repository": {
     "type": "git",
@@ -30,21 +30,22 @@
   "license": "ISC",
   "homepage": "https://github.com/sinkaszab/limbda/wiki",
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.3",
+    "@babel/cli": "^7.2.0",
+    "@babel/core": "^7.2.2",
+    "@babel/node": "^7.2.2",
+    "@babel/plugin-proposal-async-generator-functions": "^7.2.0",
+    "@babel/plugin-proposal-class-properties": "^7.2.1",
+    "@babel/plugin-proposal-do-expressions": "^7.2.0",
+    "@babel/plugin-proposal-function-bind": "^7.2.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.2.0",
+    "@babel/plugin-transform-async-to-generator": "^7.2.0",
+    "@babel/plugin-transform-exponentiation-operator": "^7.2.0",
+    "@babel/plugin-transform-regenerator": "^7.0.0",
+    "@babel/plugin-transform-runtime": "^7.2.0",
+    "@babel/preset-env": "^7.2.0",
+    "@babel/register": "^7.0.0",
     "babel-eslint": "^8.2.6",
-    "babel-plugin-tailcall-optimization": "^1.0.13",
-    "babel-plugin-transform-async-generator-functions": "^6.24.1",
-    "babel-plugin-transform-async-to-generator": "^6.24.1",
-    "babel-plugin-transform-class-properties": "^6.24.1",
-    "babel-plugin-transform-do-expressions": "^6.22.0",
-    "babel-plugin-transform-exponentiation-operator": "^6.24.1",
-    "babel-plugin-transform-function-bind": "^6.22.0",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-plugin-transform-runtime": "^6.23.0",
-    "babel-preset-env": "^1.7.0",
-    "babel-register": "^6.26.0",
-    "babel-register-cli": "^5.0.0",
+    "babel-plugin-tailcall-optimization": "^2.0.0",
     "benchmark": "^2.1.4",
     "eslint": "^4.19.1",
     "eslint-config-airbnb-base": "^13.1.0",
@@ -55,6 +56,6 @@
     "tape": "^4.9.1"
   },
   "dependencies": {
-    "babel-runtime": "^6.26.0"
+    "@babel/runtime": "^7.2.0"
   }
 }
