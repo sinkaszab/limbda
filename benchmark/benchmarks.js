@@ -1,3 +1,4 @@
+require("@babel/register");
 import Benchmark from 'benchmark';
 import { reduce } from '../dist/limbda';
 import _ from 'lodash';
