@@ -1,0 +1,6 @@
+lib/
+benchmark/
+test/
+.eslintrc
+.npmignore
+.travis.yml
