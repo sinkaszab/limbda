@@ -1,5 +1,5 @@
 import test from 'tape';
-import { filter } from './../lib/limbda';
+import { filter } from '../dist/limbda';
 
 test(
   'filter | Required arguments:',
