@@ -1,5 +1,5 @@
 import test from 'tape';
-import { map } from './../lib/limbda';
+import { map } from '../dist/limbda';
 
 test(
   'map | Required arguments:',

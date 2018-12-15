@@ -1,5 +1,5 @@
 import test from 'tape';
-import { reduce } from './../lib/limbda';
+import { reduce } from '../dist/limbda';
 
 // TODO: create a test that checks for max call-stack size exceeded.
 //       - Recursion is not optimized in engines.
