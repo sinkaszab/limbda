@@ -6,6 +6,7 @@ module.exports = {
   input: 'lib/limbda.js',
   output: {
     format: 'umd',
+    sourcemap: true,
     name: 'limbda',
   },
   plugins: [
