@@ -1,6 +1,6 @@
 {
   "name": "limbda",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "Functional programming helper library.",
   "main": "dist/limbda.js",
   "scripts": {
