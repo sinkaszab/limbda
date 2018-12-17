@@ -2,6 +2,7 @@ lib/
 benchmark/
 test/
 .eslintrc
+.eslintignore
 .babelrc
 .npmignore
 .travis.yml
