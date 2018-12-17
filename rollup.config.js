@@ -1,4 +1,5 @@
 const resolve = require('rollup-plugin-node-resolve');
+const commonjs = require('rollup-plugin-commonjs');
 const babel = require('rollup-plugin-babel');
 
 module.exports = {
@@ -9,10 +10,10 @@ module.exports = {
   },
   plugins: [
     resolve(),
+    commonjs(),
     babel({
+      runtimeHelpers: true,
       exclude: 'node_modules/**',
-      babelrc: false,
-      presets: [['@babel/env', { modules: false }]],
     }),
   ],
 };
