@@ -10,7 +10,7 @@
     "postbuild": "npm run test",
     "lint": "eslint lib/ test/",
     "start": "if [[ -z ${NODE_ENV+x} ]] || [[ $NODE_ENV =~ ^prod.*$ ]] ; then npm run start:prod ; else npm run start:dev ; fi",
-    "test": "tape --require @babel/register test/*.test.js | tap-spec",
+    "test": "tape --require @babel/register ${TEST_FILE:-test/*.test.js} | tap-spec",
     "start:dev": "babel --watch lib/ --out-dir dist/ --source-maps",
     "start:prod": "npm run build",
     "benchmark": "babel-node benchmark/benchmarks.js"
@@ -30,19 +30,19 @@
   "license": "ISC",
   "homepage": "https://github.com/sinkaszab/limbda/wiki",
   "devDependencies": {
-    "@babel/cli": "^7.2.0",
+    "@babel/cli": "^7.2.3",
     "@babel/core": "^7.2.2",
     "@babel/node": "^7.2.2",
     "@babel/plugin-proposal-async-generator-functions": "^7.2.0",
-    "@babel/plugin-proposal-class-properties": "^7.2.1",
+    "@babel/plugin-proposal-class-properties": "^7.3.0",
     "@babel/plugin-proposal-do-expressions": "^7.2.0",
     "@babel/plugin-proposal-function-bind": "^7.2.0",
-    "@babel/plugin-proposal-object-rest-spread": "^7.2.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.3.2",
     "@babel/plugin-transform-async-to-generator": "^7.2.0",
     "@babel/plugin-transform-exponentiation-operator": "^7.2.0",
     "@babel/plugin-transform-regenerator": "^7.0.0",
     "@babel/plugin-transform-runtime": "^7.2.0",
-    "@babel/preset-env": "^7.2.0",
+    "@babel/preset-env": "^7.3.1",
     "@babel/register": "^7.0.0",
     "babel-eslint": "^8.2.6",
     "babel-plugin-tailcall-optimization": "^2.0.0",
@@ -50,16 +50,16 @@
     "eslint": "^4.19.1",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-html": "^4.0.6",
-    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-import": "^2.16.0",
     "lodash": "^4.17.11",
     "rollup": "^0.67.4",
-    "rollup-plugin-babel": "^4.1.0",
+    "rollup-plugin-babel": "^4.3.2",
     "rollup-plugin-commonjs": "^9.2.0",
     "rollup-plugin-node-resolve": "^4.0.0",
     "tap-spec": "^4.1.2",
-    "tape": "^4.9.1"
+    "tape": "^4.9.2"
   },
   "dependencies": {
-    "@babel/runtime": "^7.2.0"
+    "@babel/runtime": "^7.3.1"
   }
 }
