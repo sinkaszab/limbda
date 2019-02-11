@@ -1,7 +1,7 @@
 import test from 'tape';
 import { pipe } from '../dist/limbda';
 
-test('pipe | composes functions from right to left', (t) => {
+test('pipe | composes left to right', (t) => {
   const double = x => x * 2;
   const square = x => x * x;
   const add = (x, y) => x + y;
