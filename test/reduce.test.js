@@ -1,10 +1,6 @@
 import test from 'tape';
 import { reduce } from '../dist/limbda';
 
-// TODO: create a test that checks for max call-stack size exceeded.
-//       - Recursion is not optimized in engines.
-//       - Follow-up: implement for all limbda fns.
-
 test(
   'reduce | Required arguments:',
   function testRequiredArguments(t) {
