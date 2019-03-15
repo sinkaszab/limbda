@@ -7,7 +7,7 @@ test(
     const collErrorRegex = new RegExp('boolean, number and symbol are not collections');
     t.plan(4);
     t.throws( // 1
-      () => reduce(module.notAFunction, null),
+      () => reduce(global.notAFunction, null),
       /first arg is not a function/, 'First argument must be a function.',
     );
     t.throws( // 2
@@ -170,16 +170,20 @@ test(
 test(
   'reduce | Reduce different type of collections:',
   function testOnCollections(t) {
-    t.plan(6);
+    t.plan(7);
     t.equal( // 1
       reduce((a, v) => `${a}:${v}`, 'abc'),
       'a:b:c', 'String',
     );
-    t.deepEquals( // 2
+    t.equal( // 2
+      reduce((a, v) => `${a}:${v}`, 'bcd', 'a'),
+      'a:b:c:d', 'String',
+    );
+    t.deepEquals( // 3
       reduce((a, v) => a.splice(0, 0, v + 1) && a, [1, 2, 3, 4, 5], []),
       [6, 5, 4, 3, 2], 'Array',
     );
-    t.deepEquals( // 3
+    t.deepEquals( // 4
       reduce((a, [k, v]) => {
         a[`${k}X`] = v + 1; // eslint-disable-line no-param-reassign
         return a;
@@ -190,15 +194,15 @@ test(
         aX: 2, bX: 3, cX: 4, dX: 5, eX: 6, fX: 7,
       }, 'Object',
     );
-    t.equal( // 4
+    t.equal( // 5
       reduce((a, [k, v]) => a + k + v, new Map([['a', 1], ['b', 2], ['c', 3], ['d', 4], ['e', 5], ['f', 6]]), ''),
       'a1b2c3d4e5f6', 'Map',
     );
-    t.equal( // 5
+    t.equal( // 6
       reduce((a, v) => a * v, new Set([1, 2, 2, 3, 4, 4, 4, 5, 6])),
       720, 'Set',
     );
-    t.equal( // 6
+    t.equal( // 7
       (function reduceArguments() {
         return reduce((a, v) => a * v, arguments);
       }(1, 2, 3, 4, 5, 6)),
