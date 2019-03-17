@@ -39,7 +39,7 @@ test(
 test(
   'reduce | An empty Collection without initial value returns undefined:',
   function testEmptyCollection(t) {
-    t.plan(16);
+    t.plan(18);
     t.equal( // 1
       reduce((a, v) => a + v, ''),
       undefined, 'Empty String',
@@ -106,7 +106,29 @@ test(
       reduce((a, v) => a + v, null, 12),
       12, 'If collection undefined, but has initial value, that becomes its return value.',
     );
+    t.equals( // 17
+      reduce((a, v) => a + v, [undefined]),
+      undefined, 'Collection of one undefined element with no initial value results in undefined.',
+    );
+    t.equals( // 18
+      reduce((a, v) => a + v, [null]),
+      null, 'Collection of one null element with no initial value results in null.',
+    );
   },
+);
+
+test(
+  'reduce | Doesn\'t produce lost values:', (t) => {
+    t.plan(2);
+    t.equals( // 1
+      reduce((a, v) => `${a}, ${v}`, [undefined, undefined, 1, 2, 3]),
+      'undefined, undefined, 1, 2, 3', 'No first undefined in collection as initial value drops.',
+    );
+    t.equals( // 2
+      reduce((a, v) => `${a}, ${v}`, [null, null, 1, 2, 3]),
+      'null, null, 1, 2, 3', 'No first null in collecation as initial value drops.',
+    );
+  }
 );
 
 test(
