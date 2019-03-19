@@ -110,6 +110,20 @@ test(
 );
 
 test(
+  'reduceRight | Doesn\'t produce lost values:', (t) => {
+    t.plan(2);
+    t.equals( // 1
+      reduceRight((a, v) => `${a}, ${v}`, [undefined, undefined, 1, 2, 3]),
+      '3, 2, 1, undefined, undefined', 'No first undefined in collection as initial value drops.',
+    );
+    t.equals( // 2
+      reduceRight((a, v) => `${a}, ${v}`, [null, null, 1, 2, 3]),
+      '3, 2, 1, null, null', 'No first null in collecation as initial value drops.',
+    );
+  }
+);
+
+test(
   'reduceRight | A Collection with one element (no initial value) will return that one without transformation applied to it:',
   function testOneElemCollection(t) {
     t.plan(12);
