@@ -45,26 +45,31 @@ test('compose | composes from right to left', (t) => {
 test('compose | throws at runtime if argument is not a function', (t) => {
   const square = x => x * x;
   const add = (x, y) => x + y;
-  t.plan(5);
+  const TypeErrorPattern = new RegExp('TypeError');
+  t.plan(6);
   t.throws(
     () => compose(square, add, false)(1, 2),
-    'TypeError', 'Boolean: False',
+    TypeErrorPattern, 'Boolean: False',
+  );
+  t.throws(
+    () => compose(undefined, square, add)(1, 2),
+    TypeErrorPattern, 'undefined',
   );
   t.throws(
     () => compose(square, add, undefined)(1, 2),
-    'TypeError', 'undefined',
+    TypeErrorPattern, 'undefined',
   );
   t.throws(
     () => compose(square, add, true)(1, 2),
-    'TypeError', 'Boolean: True',
+    TypeErrorPattern, 'Boolean: True',
   );
   t.throws(
     () => compose(square, add, NaN)(1, 2),
-    'TypeError', 'NaN',
+    TypeErrorPattern, 'NaN',
   );
   t.throws(
     () => compose(square, add, '42')(1, 2),
-    'TypeError', 'String'
+    TypeErrorPattern, 'String'
   );
   // TODO: test all types.
 });
