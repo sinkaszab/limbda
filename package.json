@@ -3,6 +3,9 @@
   "version": "0.3.2",
   "description": "Functional programming helper library.",
   "main": "dist/limbda.js",
+  "config": {
+    "pattern": "test/*.test.js"
+  },
   "scripts": {
     "prepare": "npm run build",
     "build": "rm -rf dist && rollup -c -o dist/limbda.js",
@@ -10,7 +13,7 @@
     "postbuild": "npm run test",
     "lint": "eslint lib/ test/",
     "start": "if [[ -z ${NODE_ENV+x} ]] || [[ $NODE_ENV =~ ^prod.*$ ]] ; then npm run start:prod ; else npm run start:dev ; fi",
-    "test": "tape --require @babel/register ${TEST_FILE:-test/*.test.js} | tap-spec",
+    "test": "tape --require @babel/register $npm_package_config_pattern | tap-spec",
     "start:dev": "babel --watch lib/ --out-dir dist/ --source-maps",
     "start:prod": "npm run build",
     "benchmark": "babel-node benchmark/benchmarks.js"
