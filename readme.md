@@ -4,23 +4,31 @@
 
 ## Rationale
 
-After having implemented array reduce with using ES6 features I remembered while having worked with Clojure for a while how nice it was that collection transformations could be done on any type of collection. One of the library's aims is to make transformations work for all collection types as well as implement some functional programming paradigms to make function composing easier.
+The library was born out of an experiment to be able to
+reduce all native JavaScript collections. It has been achieved
+that reduce, map and filter work properly (as much as the tests
+can prove).
 
-This library is a playground for me at the same time. It's fun to experiment with basic datastructures and transformations. And also a good place to play with ES6 features also.
+It is continuously being extended with functional programming
+utilities with only putting in the minimum set needed.
 
-## State
+## What to consider before jumping on the limbda train
 
-Creation of proper benchmarking is in progress.
+- Breaking changes might happen.
+- To get a full picture check the tests.
+- Implementations might contain bugs for edge cases.
 
-**Sample,** sum 10 000 numbers:
+## What about performance
 
-limbda#reduce | Sum numbers 0.00011549035685890135
+There are some rudimentary benchmarks to native & `lodash` functions.
+You can find them in the repository. The goal is to be at least that performant
+as `lodash` is. Benchmarking is mostly done to identify huge performance
+bottlenecks rather than trying to microoptimize the library.
 
-lodash#reduce | Sum numbers 0.00012098247137972124
-
-Array#reduce  | Sum numbers 0.00006934145322898773
-
-Breaking changes might happen. Best thing to do if you'd like to sniff around is to check the tests to get a picture how the library methods work. (Tests keep the contract for the functions' interface, check them for change between commits before you upgrade to a new version.)
+Also it's currently tested against a transpiled code. Without `babel` transpilation
+StackOverflow caused by tail calls would be unavoidable in Node.js 8.11 version for
+example. Also benchmarking should be "dockerized" to be able to do testing on
+all versions above the minimum required.
 
 ## Install
 
@@ -28,15 +36,20 @@ Breaking changes might happen. Best thing to do if you'd like to sniff around is
 
 ## Usage
 
-Import as you would any other packege in Node.js, eg.:
+Import as you would any other package in Node.js, eg.:
 
 `const limbda = require('limbda');`
+
+or if ES6 syntax works:
+
+`import { reduce } from 'limbda';`
 
 ## Documentation
 
 ### isIterable
 
-Check if `x` implements the iterable interface/protocol. (ES6 rest/spread operations, also generators need iterables.)
+Check if `x` implements the iterable interface/protocol.
+(ES6 rest/spread operations, also generators need iterables.)
 
 ```js
 isIterable(x: Any?) -> Boolean
@@ -44,24 +57,31 @@ isIterable(x: Any?) -> Boolean
 
 ### reduce, map, filter
 
-Reduce, map & filter work for all basic Javascript collection types: String, Array, Object, Map, Set & Arguments (Array-likes).
+Reduce, map & filter work for all native JavaScript collection types:
+String, Array, Object, Map, Set & Arguments (Array-likes).
 
 #### Transforming functions
 
-When reducing, mapping or filtering an String, Array or Set, item will be a value. In case of key-value types, item will be an "Object Entry", a.k.a. an Array of 2 items, a pair, `[key, value]`. See signatures.
+I call callbacks accepted by reduce, map & filter "transforming functions". As map & filter are both implemented with reduce basically their callback is a specialized type of reducer function.
 
-The transforming functions should return a value so that collection transformation will have a "worthwhile" final value in the end.
+**Important:** The transforming functions should return a value so that collection transformation will have a "worthwhile" final value in the end.
+
+Transforming functions receive a collection's element one by one. When working with key-value
+type collections, a pair will be passed--an "Object Entry". Map will output key-value type
+collections as an array of Object Entries: `-> [ [ key: value ], [ key: value ] ]`.
 
 ### reduce
 
 ```javascript
 reduce(reducer: Function, collection: AnyColl?, initialValue: Any?) -> Any?
+
 reducerFunction(accumulator: Any?, item: Any?) -> Any?
 ```
 
 ```javascript
 # String, Array & Set reducer signature:
 const reducerA = (accumulator, value) => accumulator + value;
+
 # Object, Map reducer signature:
 const reducerB = (accumulator, [key, value]) => accumulator + (key + value);
 ```
@@ -70,12 +90,14 @@ const reducerB = (accumulator, [key, value]) => accumulator + (key + value);
 
 ```javascript
 map(transformer: Function, collection: AnyColl?) -> Array
+
 transformerFunction(value: Any?) -> Any?
 ```
 
 ```javascript
 # String, Array & Set transformer signature:
 const transformerA = value => f(value);
+
 # Object, Map transformer signature:
 const transformerB = ([key, value]) => f(key, value);
 ```
@@ -84,12 +106,40 @@ const transformerB = ([key, value]) => f(key, value);
 
 ```javascript
 filter(filtering: Function, collection: AnyColl?) -> Array
+
 filteringFunction(value: Any?) -> Bool?
 ```
 
 ```javascript
 # String, Array & Set filtering signature:
 const filteringFnA = value => f(value);
+
 # Object, Map filtering signature:
 const filteringFnB = ([key, value]) => f(key, value);
+```
+
+### compose
+
+```javascript
+const composition = compose(funcN, funcN-1, funcN-2, ..., func2, func1) -> Any?
+const result = composition(value1: Any?, value2: Any?, ...,valueN-2: Any?, valueN-1: Any?, valueN: Any?);
+```
+
+### pipe
+
+```javascript
+const composition = pipe(func1, func2, ..., funcN-2, funcN-1, funcN) -> Any?
+const result = composition(value1: Any?, value2: Any?, ...,valueN-2: Any?, valueN-1: Any?, valueN: Any?);
+```
+
+### lazy.ObjectEntries
+
+```javascript
+const iterator = lazy.ObjectEntries(obj: AnyObject);
+```
+
+### lazy.pipe (stream mapping)
+
+```javascript
+const streamMap = lazy.pipe(func1, func2, ..., funcN-2, funcN-1, funcN);
 ```
