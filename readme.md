@@ -72,6 +72,18 @@ collections as an array of Object Entries: `-> [ [ key: value ], [ key: value ] 
 
 ### reduce
 
+#### Signature
+
+**Why callback first and initial value last?**
+
+- Creating a curried, thunkified function, using with partial application, composition
+  seems logical that you'd like to reuse reduce with a reducer function rather than a collection.
+- Callback-first is a good pattern altogether; however spreading here is not an option.
+- Follows `map` & `filter` in style, that 2nd argument is a collection.
+- Initial value before collection would enforce workarounds not native to JavaScript
+  when no initial value provided. Eg. Clojure is mainly a JVM hosted language where method overloading
+  and multi-arity function declarations are native also to the host language.
+
 ```javascript
 reduce(reducer: Function, collection: AnyColl?, initialValue: Any?) -> Any?
 
@@ -84,6 +96,15 @@ const reducerA = (accumulator, value) => accumulator + value;
 
 # Object, Map reducer signature:
 const reducerB = (accumulator, [key, value]) => accumulator + (key + value);
+```
+
+#### Example
+
+```javascript
+import { reduce } from 'limbda';
+
+const sum = (a, v) => a + v;
+const accumulatedVal = reduce(sum, [1, 2, 3], 0); // 6
 ```
 
 ### map
@@ -121,21 +142,23 @@ const filteringFnB = ([key, value]) => f(key, value);
 ### compose
 
 ```javascript
-const composition = compose(funcN, funcN-1, funcN-2, ..., func2, func1) -> Any?
-const result = composition(value1: Any?, value2: Any?, ...,valueN-2: Any?, valueN-1: Any?, valueN: Any?);
+const composed = compose(funcN, funcN-1, funcN-2, ..., func2, func1) -> Function
+
+const result = composed(value1: Any?, value2: Any?, ...,valueN-2: Any?, valueN-1: Any?, valueN: Any?);
 ```
 
 ### pipe
 
 ```javascript
-const composition = pipe(func1, func2, ..., funcN-2, funcN-1, funcN) -> Any?
-const result = composition(value1: Any?, value2: Any?, ...,valueN-2: Any?, valueN-1: Any?, valueN: Any?);
+const composed = pipe(func1, func2, ..., funcN-2, funcN-1, funcN) -> Function
+
+const result = composed(value1: Any?, value2: Any?, ...,valueN-2: Any?, valueN-1: Any?, valueN: Any?);
 ```
 
 ### lazy.ObjectEntries
 
 ```javascript
-const iterator = lazy.ObjectEntries(obj: AnyObject);
+const iterator = lazy.ObjectEntries(obj: AnyObject) -> IteratorObject;
 ```
 
 ### lazy.pipe (stream mapping)
