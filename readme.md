@@ -150,19 +150,21 @@ const result = composed(value1: Any?, value2: Any?, ...,valueN-2: Any?, valueN-1
 ### pipe
 
 ```javascript
-const composed = pipe(func1, func2, ..., funcN-2, funcN-1, funcN) -> Function
+const pipeline = pipe(func1, func2, ..., funcN-2, funcN-1, funcN) -> Function
 
-const result = composed(value1: Any?, value2: Any?, ...,valueN-2: Any?, valueN-1: Any?, valueN: Any?);
+const result = pipeline(value1: Any?, value2: Any?, ...,valueN-2: Any?, valueN-1: Any?, valueN: Any?);
 ```
 
 ### lazy.ObjectEntries
 
 ```javascript
-const iterator = lazy.ObjectEntries(obj: AnyObject) -> IteratorObject;
+lazy.ObjectEntries(obj: AnyObject) -> GeneratorFunction
 ```
 
 ### lazy.pipe (stream mapping)
 
 ```javascript
-const streamMap = lazy.pipe(func1, func2, ..., funcN-2, funcN-1, funcN);
+const streamMap: Function = lazy.pipe(func1, func2, ..., funcN-2, funcN-1, funcN);
+
+streamMap(it: Iterator) -> Generator
 ```
